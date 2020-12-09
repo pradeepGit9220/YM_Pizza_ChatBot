@@ -1,0 +1,36 @@
+return new Promise(async resolve => {
+    // Your logic goes here
+    
+    let name = app.context.steps.name
+    let mobile = app.context.steps.mobilenumber
+    let deliveryaddress = app.context.steps.deliveryaddress
+    let item = await app.memory.get("itemSelected").catch(() => "")
+    let orderID = Math.floor((Math.random() * 100) + 1);
+    let cards = []
+    //console.log("---orderID"+orderID);
+    
+    await app.dataStore.insert({
+        table: "user_data",
+        record: {
+            name: name,
+            mobile: mobile,
+            item: item,
+            orderid: orderID,
+            delivery_address: deliveryaddress
+
+        }
+    });
+
+    await app.memory.set('orderID', orderID)
+    await app.sendTextMessage(`Currently COD is available, <br/> Your order is placed with the <br/>ORDER ID : ${orderID} 
+                                <br/>Thank you for ordering,Your order will be delivered soon. <br/><br/>Have a Yummy Day !!`);
+    cards.push({
+        image: "https://static.vecteezy.com/system/resources/thumbnails/000/440/480/small/Basic_Ui__28489_29.jpg",
+        title: "Track my Order"
+    })
+
+    await app.sendCards(cards)
+    await app.invokeJourney('food-order')
+    
+    resolve();
+});

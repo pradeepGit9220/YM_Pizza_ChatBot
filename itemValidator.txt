@@ -1,0 +1,6 @@
+return new Promise(async (resolve, reject) => {
+    // Your logic goes here
+    let item = app.data.message.toLowerCase();
+    await app.memory.set('itemSelected', item)
+    resolve();
+});

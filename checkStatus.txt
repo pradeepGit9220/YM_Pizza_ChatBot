@@ -1,0 +1,43 @@
+return new Promise(async resolve => {
+    // Your logic goes here
+    // await app.memory.delete("orderID") - to deletet the order
+
+    let orderID = await app.memory.get("orderID").catch(() => "")
+    console.log("---orderID" + orderID);
+   
+    if (orderID == "") {
+        app.sendTextMessage(`There are no previous orders`);
+        await app.invokeJourney('food-order')
+    } else {
+        app.sendTextMessage(`Your order status for this <br/>order ID : ${orderID} will be delivered shortly.`);
+        let cards = []
+        cards.push({
+            image: "https://static.vecteezy.com/system/resources/thumbnails/000/440/480/small/Basic_Ui__28489_29.jpg",
+            title: "Track my Order"
+        })
+        await app.sendCards(cards)
+        await app.invokeJourney('food-order')
+    }
+    
+    resolve();
+
+    //Using DB - not getting the results, need to check
+
+    //let orderID = app.context.steps.orderid
+    // await app.dataStore.search({
+    //     table: "user_data",
+    //     body: {
+    //         query: {
+    //             match : {
+    //                 orderid : {
+    //                     query: orderID
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }).then((result) => {
+    //     app.log(result, 'result');
+    // });
+
+
+});

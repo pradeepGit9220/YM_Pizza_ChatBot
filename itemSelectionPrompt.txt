@@ -1,0 +1,43 @@
+return new Promise(async resolve => {
+    // Your logic goes here
+    let type = app.context.steps.type
+    console.log('-------type of-----------', type); //from options type = Veg/Non-Veg
+    let cards = []
+    if (type == "Veg") {
+        cards.push({
+            title: "Panner Tikka <br/><br/><b>Rs. 399</b>",
+            image: "https://media.istockphoto.com/photos/whole-italian-pizza-on-wooden-table-with-ingredients-picture-id1048400936?k=6&m=1048400936&s=612x612&w=0&h=b-tUMgFcIFBL9d-8qWFmC1X134Qldh5jdthz9JGDsb8=",
+            actions: [{
+                "title": "Order Now",
+                "text": "Panner Tikka Pizza" //item
+            }]
+        },
+            {
+                title: "Tomato Pizza <br/><br/><b>Rs. 299</b>",
+                image: "https://media.istockphoto.com/photos/pizza-picture-id1054857274?k=6&m=1054857274&s=612x612&w=0&h=ASdxtmEW1lz5ku24sk4n2Jpkgc5GWbwvbtnyTI6_95s=",
+                actions: [{
+                    "title": "Order Now",
+                    "text": "Tomato Pizza" //item
+                }]
+            })
+    } else {
+        cards.push({
+            title: "Chicken Cheesy  <br/><br/><b>Rs. 599</b>",
+            image: "https://media.istockphoto.com/photos/pizza-picture-id184946701?k=6&m=184946701&s=612x612&w=0&h=eXhXb-L3FP9bZ4h4TlQBp1oXcVlD8LeH3y-wsWn8meA=",
+            actions: [{
+                "title": "Order Now",
+                "text": "Chicken Cheesy" //item
+            }]
+        },
+            {
+                title: "Chicken Golden Delight <br/><br/><b>Rs. 699</b>",
+                image: "https://media.istockphoto.com/photos/pizza-pepperoni-with-black-olives-picture-id861661836?k=6&m=861661836&s=612x612&w=0&h=E7s3Am61b4n1PJ9uAKNqkbSQGG0-rM-OGV1DjiSdtns=",
+                actions: [{
+                    "title": "Order Now",
+                    "text": "Chicken Golden Delight" //item
+                }]
+            })
+    }
+    await app.sendCards(cards)
+    resolve();
+});
